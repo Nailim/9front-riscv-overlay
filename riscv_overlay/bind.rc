@@ -1,0 +1,36 @@
+#!/bin/rc
+
+# This script can be used for a temporary "soft install"
+# to try building the riscv toolchain and libraries.
+# Or more simply, just unpack this tree into the root fs.
+
+# Before building with objtype=riscv or objtype=riscv64,
+# (re)install these for the host system, in order:
+#	/sys/src/cmd/i[acl]
+#	/sys/src/libmach
+#	/sys/src/cmd/^(ar file nm size strip)^.c
+#	/sys/src/cmd/^(db acid)
+
+bind -a  . /
+bind -a  acme/bin /acme/bin
+bind -b  sys/include /sys/include
+bind -a  sys/lib/acid /sys/lib/acid
+bind -c  sys/src/mkfile.proto /sys/src/mkfile.proto
+bind -a  sys/src/libc /sys/src/libc
+bind -bc sys/src/libc/9syscall /sys/src/libc/9syscall
+bind -bc sys/src/libmach /sys/src/libmach
+bind -a  sys/src/libmp /sys/src/libmp
+bind -a  sys/src/libsec /sys/src/libsec
+bind -ac sys/src/libthread /sys/src/libthread
+bind -ac sys/src/cmd /sys/src/cmd
+bind -bc sys/src/cmd/gs /sys/src/cmd/gs
+bind -c  sys/src/cmd/file.c /sys/src/cmd/file.c
+bind -c  sys/src/cmd/pcc.c /sys/src/cmd/pcc.c
+bind -c  sys/src/ape/9src/cc.c /sys/src/ape/9src/cc.c
+bind -ac sys/src/ape/lib/9 /sys/src/ape/lib/9
+bind -a  sys/src/ape/lib/ap /sys/src/ape/lib/ap
+bind -bc sys/src/ape/lib/ap/syscall /sys/src/ape/lib/ap/syscall
+bind -a  sys/src/ape/lib/mp /sys/src/ape/lib/mp
+bind -a  sys/src/ape/lib/sec /sys/src/ape/lib/sec
+bind -b  sys/doc /sys/doc
+bind -b  sys/man/1 /sys/man/1
