@@ -25,6 +25,8 @@ Rebuild the source tree.
 
 ## notes
 
+Tested on [MangoPi](https://mangopi.org/mqpro) SBC with [LED poke in assembly](https://github.com/Nailim/LanguageTestingPlayground/tree/master/RV/mango-pi/poke-led-baremetal-c-plan9).
+
 It appears only 32bit RiscV targets works.
 
 Good luck with the rest.
