@@ -123,7 +123,7 @@ Optab	optab[] =
  /* addi	*/	AMOVW,		C_SECON,	C_REG,		11,0,	4,	OOP_IMM,	0,	0,
  /* addi	*/	AMOVW,		C_SACON,	C_REG,		11,0,	4,	OOP_IMM,	0,	0,
  /* lui,addi	*/	AMOVW,		C_LCON,		C_REG,		9,0,	8,	OOP_IMM,	0,	0,
- /* lui,addi	*/	AMOVW,		C_LECON,	C_REG,		9,0,	8,	OOP_IMM,	0,	0,
+ /* lui,addi	*/	AMOVW,		C_LECON,	C_REG,		20,0,	8,	OOP_IMM,	0,	0,
  /* ",",add	*/	AMOVW,		C_LACON,	C_REG,		14,0,	12,	OOP_IMM,	0,	0,
 
  /* add		*/	AMOV,		C_REG,		C_REG,		0,2,	4,	OOP,		0,	0,
