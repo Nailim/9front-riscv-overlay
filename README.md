@@ -3,7 +3,7 @@ A port of [Richard Millers](http://9p.io/sources/contrib/miller/) [RiscV](http:/
 
 ## about
 
-More accurately, a rebase of Richard Millers RiscV Plan9 compiler source onto 9front codebase.
+More accurately, a rebase of Richard Millers RiscV Plan9 compiler source onto 9front codebase with fixes that make example programs run on [MangoPi](https://mangopi.org/mqpro) SBC.
 
 ## requirements
 
@@ -25,8 +25,8 @@ Rebuild the source tree.
 
 ## notes
 
-Tested on [MangoPi](https://mangopi.org/mqpro) SBC with [LED poke in assembly](https://github.com/Nailim/LanguageTestingPlayground/tree/master/RV/mango-pi/poke-led-baremetal-c-plan9).
+Tested with [various examples](https://github.com/Nailim/LanguageTestingPlayground/tree/master/RV/mango-pi-plan9).
 
-It appears only 32bit RiscV targets works.
+Compiled with objtype=riscv64 and loaded on MangoPi trough U-Boot.
 
 Good luck with the rest.
