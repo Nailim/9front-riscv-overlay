@@ -7,9 +7,13 @@ More accurately, a rebase of Richard Millers RiscV Plan9 compiler source onto 9f
 
 ## requirements
 
-A 9front ["THIS TIME DEFINITELY"](https://9front.org/releases/2025/01/19/0/) release.
+A 9front installation. Tested with releases:
 
-Might work with newers.
+- ["THIS TIME DEFINITELY"](https://9front.org/releases/2025/01/19/0/)
+
+- ["GEFS SERVICE PACK 1"](https://9front.org/releases/2026/01/24/0/)
+
+Might work with newer releases.
 
 ## usage
 
