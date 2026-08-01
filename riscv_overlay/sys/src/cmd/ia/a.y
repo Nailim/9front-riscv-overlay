@@ -73,7 +73,11 @@ inst:
 	}
 |	oprrr rreg ',' sreg ',' rreg
 	{
-		outcode($1, &$2, $4, &$6);
+		Gen g1;
+		g1 = nullgen;
+		g1.type = D_REG;
+		g1.reg = $4;
+		outcode($1, &g1, $2.reg, &$6);
 	}
 
 |	LFLT2 drreg ',' drreg
@@ -87,7 +91,11 @@ inst:
 
 |	LBEQ rreg ',' sreg ',' rel
 	{
-		outcode($1, &$2, $4, &$6);
+		Gen g1;
+		g1 = nullgen;
+		g1.type = D_REG;
+		g1.reg = $4;
+		outcode($1, &g1, $2.reg, &$6);
 	}
 
 |	LBEQ rreg ',' rel
@@ -256,7 +264,7 @@ inst:
 	}
 |	LDATA name '/' con ',' ximm
 	{
-		outcode($1, &$2, $4, &$6);
+
 	}
 |	LDATA name '/' con ',' fimm
 	{
