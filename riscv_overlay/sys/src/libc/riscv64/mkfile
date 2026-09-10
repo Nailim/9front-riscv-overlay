@@ -15,7 +15,7 @@ SFILES=\
 #	memccpy.s\
 #	memchr.s\
 #	memcmp.s\
-#	memmove.s\
+	memmove.s\
 	memset.s\
 #	setsb.s\
 	setjmp.s\
