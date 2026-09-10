@@ -7,7 +7,7 @@ SFILES=\
 	atom.s\
 	atomic.s\
 	atomic64.s\
-#	cycles.s\
+	cycles.s\
 	getcallerpc.s\
 	getfcr.s\
 	main9.s\
