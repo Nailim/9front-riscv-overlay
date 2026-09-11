@@ -23,6 +23,11 @@ typedef unsigned short u16int;
 typedef unsigned int	u32int;
 typedef unsigned long long u64int;
 
+typedef signed char s8int;
+typedef signed short s16int;
+typedef signed int s32int;
+typedef signed long long s64int;
+
 /* FCR */
 #define	FPINEX	0
 #define	FPUNFL	0
