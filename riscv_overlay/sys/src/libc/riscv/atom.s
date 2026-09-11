@@ -7,11 +7,14 @@
 #define SP	R2
 #define ARG	8
 
-#define SYNC	WORD $0xf	/* FENCE */
+#define MASK(w)	((1<<(w))-1)
+#define SYNC	WORD $(0xf | MASK(8)<<20)	/* was WORD $0xf: ordered nothing */
+#define AQ	(1<<26)			/* acquire */
+#define RL	(1<<25)			/* release */
 #define LRW(rs2, rs1, rd) \
-	WORD $((2<<27)|(    0<<20)|((rs1)<<15)|(2<<12)|((rd)<<7)|057)
+	WORD $((2<<27)|(    0<<20)|((rs1)<<15)|(2<<12)|((rd)<<7)|057|AQ)
 #define SCW(rs2, rs1, rd) \
-	WORD $((3<<27)|((rs2)<<20)|((rs1)<<15)|(2<<12)|((rd)<<7)|057)
+	WORD $((3<<27)|((rs2)<<20)|((rs1)<<15)|(2<<12)|((rd)<<7)|057|AQ|RL)
 
 TEXT ainc(SB), 1, $-4			/* long ainc(long *); */
 	MOVW	R(ARG), R12		/* address of counter */

@@ -1,5 +1,8 @@
 /*
  *	RISC-V cycle counter
+ *
+ *	Requires the kernel to have set scounteren.CY; without it this
+ *	traps as an illegal instruction in user mode.
  */
 
 #define ARG		8

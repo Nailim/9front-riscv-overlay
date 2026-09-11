@@ -1,9 +1,12 @@
+GLOBL	_tos(SB), $XLEN
+
 	TEXT	_main(SB), 1, $(3*XLEN)
 
 	MOV	$setSB(SB), R3
+	MOV	R8, _tos(SB)		/* kernel passes the TOS pointer in R8 */
 	JAL	R1, _envsetup(SB)
 
-	MOVW	inargc-XLEN(FP), R8
+	MOV	inargc-XLEN(FP), R8
 	MOV 	R8, XLEN(R2)
 	MOV 	$inargv+0(FP), R9
 	MOV 	R9, (2*XLEN)(R2)
