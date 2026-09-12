@@ -15,6 +15,7 @@ bind -a  . /
 bind -a  acme/bin /acme/bin
 bind -b  sys/include /sys/include
 bind -a  sys/lib/acid /sys/lib/acid
+bind -c  sys/lib/rootstub /sys/lib/rootstub
 bind -c  sys/src/mkfile.proto /sys/src/mkfile.proto
 bind -a  sys/src/libc /sys/src/libc
 bind -bc sys/src/libc/9syscall /sys/src/libc/9syscall
