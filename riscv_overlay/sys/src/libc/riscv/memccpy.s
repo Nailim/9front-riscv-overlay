@@ -1,5 +1,5 @@
-	TEXT	memccpy(SB), $0
-MOVW R8, 0(FP)
+TEXT	memccpy(SB), 1, $0
+	MOVW R8, 0(FP)
 	MOVW	n+12(FP), R8
 	BEQ	R8, ret
 	MOVW	s1+0(FP), R10

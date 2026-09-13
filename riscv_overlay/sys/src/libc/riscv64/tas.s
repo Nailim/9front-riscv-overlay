@@ -15,8 +15,8 @@
 	WORD $((3<<27)|((rs2)<<20)|((rs1)<<15)|(2<<12)|((rd)<<7)|057|AQ|RL)
 
 /* atomically set *keyp non-zero and return previous contents */
-TEXT	_tas(SB), $-4		/* int _tas(ulong *keyp) */
-	MOV	R(ARG), R12		/* address of key */
+TEXT	_tas(SB), 1, $-4	/* int _tas(ulong *keyp) */
+	MOV	R(ARG), R12			/* address of key */
 	MOV	$1, R10
 	FENCE
 tas1:

@@ -8,7 +8,7 @@ OFILES=\
 	getfcr.$O\
 	lock.$O\
 	main9.$O\
-#	main9p.$O\
+	main9p.$O\
 	malloc.$O\
 #	memmove.$O\
 #	memset.$O\

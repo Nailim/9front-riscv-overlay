@@ -1,5 +1,5 @@
-	TEXT	memset(SB),$12
-MOVW R8, s1+0(FP)
+TEXT	memset(SB), 1, $12
+	MOVW R8, s1+0(FP)
 
 	MOVW	n+8(FP), R10		/* R10 is count */
 	MOVW	p+0(FP), R11		/* R11 is pointer */

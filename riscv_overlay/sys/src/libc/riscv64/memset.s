@@ -1,4 +1,4 @@
-	TEXT	memset(SB),$12
+TEXT	memset(SB), 1, $12
 
 	MOV	R8, s1+0(FP)
 	MOV	R8, R11			/* R11 is pointer */

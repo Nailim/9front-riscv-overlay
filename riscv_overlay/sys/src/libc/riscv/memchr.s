@@ -1,5 +1,5 @@
-	TEXT	memchr(SB), $0
-MOVW R8, 0(FP)
+TEXT	memchr(SB), 1, $0
+	MOVW R8, 0(FP)
 
 	MOVW	n+8(FP), R8
 	MOVW	s1+0(FP), R9

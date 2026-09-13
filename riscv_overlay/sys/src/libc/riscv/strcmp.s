@@ -1,4 +1,4 @@
-TEXT	strcmp(SB), $0
+TEXT	strcmp(SB), 1, $0
 
 	MOVW	s2+4(FP), R9
 

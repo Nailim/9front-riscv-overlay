@@ -1,4 +1,4 @@
-	TEXT	strchr(SB), $0
+TEXT	strchr(SB), 1, $0
 	MOVBU	c+4(FP), R11
 	MOVW	R8, R10
 

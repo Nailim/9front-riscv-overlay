@@ -1,4 +1,4 @@
-TEXT	strcpy(SB), $0
+TEXT	strcpy(SB), 1, $0
 
 	MOVW	s2+4(FP),R9		/* R9 is from pointer */
 	MOVW	R8, R10			/* R10 is to pointer */

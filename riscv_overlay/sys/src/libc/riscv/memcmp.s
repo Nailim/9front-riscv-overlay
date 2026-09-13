@@ -1,4 +1,4 @@
-	TEXT	memcmp(SB), $0
+TEXT	memcmp(SB), 1, $0
 	MOVW 	R8, s1+0(FP)
 	MOVW	n+8(FP), R15		/* R15 is count */
 	MOVW	s1+0(FP), R9		/* R9 is pointer1 */

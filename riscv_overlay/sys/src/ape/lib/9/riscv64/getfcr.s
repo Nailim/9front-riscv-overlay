@@ -4,18 +4,18 @@
 #define FRM		2
 #define FCSR		3
 
-TEXT	getfsr(SB), $0
+TEXT	getfsr(SB), 1, $0
 	MOV	CSR(FCSR), R(ARG)
 	RET
 
-TEXT	setfsr(SB), $0
+TEXT	setfsr(SB), 1, $0
 	MOV	R(ARG), CSR(FCSR)
 	RET
 
-TEXT	getfcr(SB), $0
+TEXT	getfcr(SB), 1, $0
 	MOV	CSR(FCSR), R(ARG)
 	RET
 
-TEXT	setfcr(SB), $0
+TEXT	setfcr(SB), 1, $0
 	MOV	R(ARG), CSR(FCSR)
 	RET

@@ -1,6 +1,6 @@
 
-	TEXT	memcpy(SB), $-4
-	TEXT	memmove(SB), $-4
+	TEXT	memcpy(SB), 1, $-4
+	TEXT	memmove(SB), 1, $-4
 	MOVW	R8, s1+0(FP)
 
 	MOVW	n+8(FP), R9	/* count */
