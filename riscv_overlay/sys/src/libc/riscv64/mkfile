@@ -12,9 +12,9 @@ SFILES=\
 	getfcr.s\
 	main9.s\
 	main9p.s\
-#	memccpy.s\
-#	memchr.s\
-#	memcmp.s\
+	memccpy.s\
+	memchr.s\
+	memcmp.s\
 	memmove.s\
 	memset.s\
 #	setsb.s\

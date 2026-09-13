@@ -40,7 +40,7 @@ realloc(void*, ulong)
 {
 	fprint(2, "realloc called\n");
 	abort();
-	return 0;
+	// return 0;	// warning: unreachable code RETURN
 }
 
 void
