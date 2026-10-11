@@ -850,11 +850,19 @@ gmove(Node *f, Node *t)
 		case TUINT:
 		case TLONG:
 		case TULONG:
-		case TSHORT:
-		case TUSHORT:
-		case TCHAR:
-		case TUCHAR:
 			a = AMOVW;
+			break;
+		case TSHORT:
+			a = AMOVH;
+			break;
+		case TUSHORT:
+			a = AMOVHU;
+			break;
+		case TCHAR:
+			a = AMOVB;
+			break;
+		case TUCHAR:
+			a = AMOVBU;
 			break;
 		}
 		break;
@@ -877,11 +885,19 @@ gmove(Node *f, Node *t)
 		case TLONG:
 		case TULONG:
 		case TIND:
-		case TSHORT:
-		case TUSHORT:
-		case TCHAR:
-		case TUCHAR:
 			a = AMOV;
+			break;
+		case TSHORT:
+			a = AMOVH;
+			break;
+		case TUSHORT:
+			a = AMOVHU;
+			break;
+		case TCHAR:
+			a = AMOVB;
+			break;
+		case TUCHAR:
+			a = AMOVBU;
 			break;
 		}
 		break;
@@ -908,14 +924,22 @@ gmove(Node *f, Node *t)
 		case TLONG:
 		case TULONG:
 		case TIND:
-		case TSHORT:
-		case TUSHORT:
-		case TCHAR:
-		case TUCHAR:
 			if(thechar == 'j' && f->op == OCONST)
 				a = AMOVW;
 			else
 				a = AMOV;
+			break;
+		case TSHORT:
+			a = AMOVH;
+			break;
+		case TUSHORT:
+			a = AMOVHU;
+			break;
+		case TCHAR:
+			a = AMOVB;
+			break;
+		case TUCHAR:
+			a = AMOVBU;
 			break;
 		}
 		break;
@@ -1047,7 +1071,9 @@ gmove(Node *f, Node *t)
 	}
 	if(a == AGOK)
 		diag(Z, "bad opcode in gmove %T -> %T", f->type, t->type);
-	if(a == AMOV || (thechar == 'i' && (a == AMOVW || a == AMOVWU)) || a == AMOVF || a == AMOVD)
+	if(a == AMOV
+	|| (thechar == 'i' && (a == AMOVW || a == AMOVWU)) && ewidth[ft] == ewidth[tt]
+	|| a == AMOVF || a == AMOVD)
 	if(samaddr(f, t))
 		return;
 	gins(a, f, t);
