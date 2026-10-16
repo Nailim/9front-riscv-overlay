@@ -815,10 +815,15 @@ gmove(Node *f, Node *t)
 			if(ft == TFLOAT)
 				a = AMOVFV;
 			break;
-		case TINT:
 		case TUINT:
-		case TLONG:
 		case TULONG:
+			regalloc(&nod, t, Z);
+			gins(ft == TFLOAT ? AMOVFV : AMOVDV, f, &nod);
+			gins(AMOVW, &nod, t);
+			regfree(&nod);
+			return;
+		case TINT:
+		case TLONG:
 		case TIND:
 		case TSHORT:
 		case TUSHORT:
@@ -968,10 +973,16 @@ gmove(Node *f, Node *t)
 			a = AMOVH;
 			break;
 		case TSHORT:
+			a = AMOV;		/* same type: elided if same register */
+			break;
 		case TUSHORT:
+			a = AMOVHU;		/* -1 -> 65535 */
+			break;
 		case TCHAR:
+			a = AMOVB;		/* 128 -> -128 */
+			break;
 		case TUCHAR:
-			a = AMOV;
+			a = AMOVBU;		/* -1 -> 255 */
 			break;
 		}
 		break;
@@ -999,10 +1010,16 @@ gmove(Node *f, Node *t)
 			a = AMOVHU;
 			break;
 		case TSHORT:
+			a = AMOVH;		/* 32768 -> -32768 */
+			break;
 		case TUSHORT:
+			a = AMOV;		/* same type */
+			break;
 		case TCHAR:
+			a = AMOVB;		/* 255 -> -1 */
+			break;
 		case TUCHAR:
-			a = AMOV;
+			a = AMOVBU;		/* 256 -> 0 */
 			break;
 		}
 		break;
@@ -1028,12 +1045,16 @@ gmove(Node *f, Node *t)
 		case TVLONG:
 		case TUVLONG:
 		case TSHORT:
+			a = AMOVB;		/* sign-extend: correct for all of these */
+			break;
 		case TUSHORT:
-			a = AMOVB;
+			a = AMOVHU;		/* -1 -> 65535, not -1 */
 			break;
 		case TCHAR:
+			a = AMOV;		/* same type */
+			break;
 		case TUCHAR:
-			a = AMOV;
+			a = AMOVBU;		/* -1 -> 255 */
 			break;
 		}
 		break;
@@ -1063,8 +1084,10 @@ gmove(Node *f, Node *t)
 			a = AMOVBU;
 			break;
 		case TCHAR:
+			a = AMOVB;		/* 255 -> -1 */
+			break;
 		case TUCHAR:
-			a = AMOV;
+			a = AMOV;		/* same type */
 			break;
 		}
 		break;
@@ -1479,10 +1502,10 @@ schar	ewidth[NTYPE] =
 long	ncast[NTYPE] =
 {
 	0,				/* [TXXX] */
-	BCHAR|BUCHAR,			/* [TCHAR] */
-	BCHAR|BUCHAR,			/* [TUCHAR] */
-	BSHORT|BUSHORT,			/* [TSHORT] */
-	BSHORT|BUSHORT,			/* [TUSHORT] */
+	BCHAR,			/* [TCHAR] */
+	BUCHAR,			/* [TUCHAR] */
+	BSHORT,			/* [TSHORT] */
+	BUSHORT,		/* [TUSHORT] */
 	BINT|BUINT|BLONG|BULONG|BIND,	/* [TINT] */
 	BINT|BUINT|BLONG|BULONG|BIND,	/* [TUINT] */
 	BINT|BUINT|BLONG|BULONG|BIND,	/* [TLONG] */
@@ -1503,10 +1526,10 @@ long	ncast[NTYPE] =
 static long ncast64[NTYPE] =
 {
 	0,				/* [TXXX] */
-	BCHAR|BUCHAR,			/* [TCHAR] */
-	BCHAR|BUCHAR,			/* [TUCHAR] */
-	BSHORT|BUSHORT,			/* [TSHORT] */
-	BSHORT|BUSHORT,			/* [TUSHORT] */
+	BCHAR,			/* [TCHAR] */
+	BUCHAR,			/* [TUCHAR] */
+	BSHORT,			/* [TSHORT] */
+	BUSHORT,		/* [TUSHORT] */
 	BINT|BUINT|BLONG|BULONG,	/* [TINT] */
 	BINT|BUINT|BLONG|BULONG,	/* [TUINT] */
 	BINT|BUINT|BLONG|BULONG,	/* [TLONG] */

@@ -32,7 +32,6 @@ BIN=/$objtype/bin
 $LIB:
 	cd ../cc
 	mk install
-	mk clean
 
 ../cc/y.tab.h: ../cc/cc.y
 	cd ../cc
