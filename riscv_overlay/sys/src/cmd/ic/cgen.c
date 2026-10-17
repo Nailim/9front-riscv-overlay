@@ -649,7 +649,7 @@ boolgen(Node *n, int true, Node *nn)
 {
 	int o;
 	Prog *p1, *p2;
-	Node *l, *r, nod, nod1, nod2;
+	Node *l, *r, nod, nod1, nod2, nod3;
 	long curs;
 
 	if(debug['g']) {
@@ -664,20 +664,39 @@ boolgen(Node *n, int true, Node *nn)
 	default:
 		regalloc(&nod, n, nn);
 		cgen(n, &nod);
+		if(typefd[n->type->etype]) {
+			/*
+			 * Compare against F28, which holds a double 0.0.  A
+			 * single-precision instruction reads that as NaN (it
+			 * is not NaN-boxed), so widen a float operand and
+			 * compare as doubles.
+			 */
+			nodreg(&nod1, n, NREG+FREGZERO);
+			nod1.type = types[TDOUBLE];
+			if(n->type->etype == TFLOAT) {
+				regalloc(&nod3, &nod1, Z);
+				gmove(&nod, &nod3);
+				regfree(&nod);
+				nod = nod3;
+			}
+		}
 		if(nn == Z) {
 			o = true? OEQ : ONE;
-			if(typefd[n->type->etype]) {
-				nodreg(&nod1, n, NREG+FREGZERO);
+			if(typefd[n->type->etype])
 				gopcode(o, &nod, &nod1, Z);
-			} else
+			else
 				gopcode(o, &nod, Z, Z);
 			regfree(&nod);
 			break;
 		}
 		if(typefd[n->type->etype]) {
 			regalloc(&nod2, nn, nn);
-			o = true? ONE : OEQ;
-			nodreg(&nod1, n, NREG+FREGZERO);
+			/*
+			 * Value form: gopcode(OEQ, ..) yields a != 0 and
+			 * gopcode(ONE, ..) yields a == 0, the complement of
+			 * the branch form above.  So true wants OEQ.
+			 */
+			o = true? OEQ : ONE;
 			gopcode(o, &nod, &nod1, &nod2);
 			gopcode(OAS, &nod2, Z, nn);
 			regfree(&nod2);
@@ -691,6 +710,7 @@ boolgen(Node *n, int true, Node *nn)
 		gopcode(OAS, &nod, Z, nn);
 		regfree(&nod);
 		break;
+
 
 	case OCONST:
 		o = vconst(n);

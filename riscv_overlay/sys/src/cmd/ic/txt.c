@@ -677,6 +677,7 @@ gmove(Node *f, Node *t)
 			a = FREGZERO;
 		ffreg:
 			nodreg(&nod, f, NREG+a);
+			nod.type = types[TDOUBLE];	/* F28-F31 hold doubles; to a float t this is MOVDF */
 			gmove(&nod, t);
 			return;
 		}
