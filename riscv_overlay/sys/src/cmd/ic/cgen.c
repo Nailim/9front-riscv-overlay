@@ -649,7 +649,7 @@ boolgen(Node *n, int true, Node *nn)
 {
 	int o;
 	Prog *p1, *p2;
-	Node *l, *r, nod, nod1, nod2, nod3;
+	Node *l, *r, *tn, nod, nod1, nod2, nod3;
 	long curs;
 
 	if(debug['g']) {
@@ -798,6 +798,18 @@ boolgen(Node *n, int true, Node *nn)
 			nod.right = &nod1;
 			boolgen(&nod, true, nn);
 			break;
+		}
+		if(typefd[l->type->etype] && (o == OGT || o == OGE)) {
+			/*
+			 * a > b is b < a.  The complement used below, a <= b,
+			 * is true for an unordered pair, which is wrong for NaN.
+			 * < and <= already come out right: their complements
+			 * compile to a positive compare and a jump on zero.
+			 */
+			tn = l;
+			l = r;
+			r = tn;
+			o = (o == OGT)? OLT: OLE;
 		}
 		if(true)
 			o = comrel[relindex(o)];
